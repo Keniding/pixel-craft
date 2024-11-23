@@ -1,4 +1,5 @@
 <div class="min-h-screen bg-gradient-to-br from-pastel-purple via-pastel-pink to-pastel-blue p-4">
+  <app-header></app-header>
   <div class="container mx-auto animate-fade-in">
     <div class="backdrop-blur-lg bg-white/30 rounded-2xl shadow-2xl p-8 border border-white/40">
       <!-- Área de carga de imagen -->
@@ -53,13 +54,15 @@
            class="space-y-8 animate-fade-in">
         <div class="relative group">
           <img [src]="image"
+               [ngStyle]="getFilterStyle()"
                class="w-full rounded-xl shadow-2xl transition-all duration-300
                       group-hover:shadow-pastel-purple/50">
 
           <!-- Overlay con acciones rápidas -->
           <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <!-- Botones de acción rápida -->
             <button class="p-2 rounded-lg bg-white/30 backdrop-blur-sm hover:bg-white/40
-                         transition-all duration-300 shadow-lg">
+                          transition-all duration-300 shadow-lg">
               <svg xmlns="http://www.w3.org/2000/svg"
                    class="h-5 w-5 text-gray-800"
                    fill="none"
@@ -72,7 +75,7 @@
               </svg>
             </button>
             <button class="p-2 rounded-lg bg-white/30 backdrop-blur-sm hover:bg-white/40
-                         transition-all duration-300 shadow-lg">
+                          transition-all duration-300 shadow-lg">
               <svg xmlns="http://www.w3.org/2000/svg"
                    class="h-5 w-5 text-gray-800"
                    fill="none"
@@ -94,7 +97,8 @@
         <!-- Panel de controles -->
         <div class="backdrop-blur-sm bg-white/20 rounded-xl p-6 shadow-lg">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="space-y-3">
+            <!-- Iteramos sobre los filtros configurados -->
+            <div *ngFor="let filter of filterConfigs" class="space-y-3">
               <label class="flex items-center gap-2 text-gray-800 font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      class="h-5 w-5"
@@ -104,41 +108,24 @@
                   <path stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
+                        [attr.d]="filter.icon" />
                 </svg>
-                Brillo
+                {{ filter.label }}
               </label>
               <input type="range"
-                     min="0"
-                     max="200"
-                     value="100"
+                     [min]="filter.min"
+                     [max]="filter.max"
+                     [value]="filter.default"
                      class="slider-control"
-                     (input)="adjustBrightness($event)">
-            </div>
-            <div class="space-y-3">
-              <label class="flex items-center gap-2 text-gray-800 font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="h-5 w-5"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor">
-                  <path stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M20 4v7m0 4v7M4 4v7m0 4v7M12 4v7m0 4v7" />
-                </svg>
-                Contraste
-              </label>
-              <input type="range"
-                     min="0"
-                     max="200"
-                     value="100"
-                     class="slider-control"
-                     (input)="adjustContrast($event)">
+                     (input)="adjustFilter($event, filter.name)">
+                    <span class="text-sm text-gray-600">
+                  {{ (imageService.filters$ | async)?.[filter.name] }}{{ filter.unit }}
+                </span>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <app-footer></app-footer>
 </div>

@@ -1,0 +1,19 @@
+.slider-control {
+  @apply h-2 bg-white/30 rounded-lg appearance-none cursor-pointer;
+}
+
+.slider-control::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  @apply w-6 h-6 bg-white rounded-full cursor-pointer shadow-lg
+  hover:bg-pastel-purple transition-colors duration-300;
+}
+
+.slider-control::-moz-range-thumb {
+  @apply w-6 h-6 bg-white rounded-full cursor-pointer border-none shadow-lg
+  hover:bg-pastel-purple transition-colors duration-300;
+}
+
+/* Animación suave para el hover del contenedor de imagen */
+.image-container:hover .image-overlay {
+  @apply opacity-100;
+}

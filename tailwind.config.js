@@ -12,17 +12,19 @@ module.exports = {
         'pastel-yellow': '#FFFFD1',
         'pastel-purple': '#E0BBE4',
       },
+      backgroundSize: {
+        'gradient-size': '400% 400%',
+      },
       backgroundImage: {
-        'gradient-pastel': 'linear-gradient(to right, #FFD1DC, #A8D8EA, #CCFFD8)',
+        'gradient-pastel-moving': 'linear-gradient(-45deg, #FFD1DC, #A8D8EA, #CCFFD8, #E0BBE4)',
       },
       animation: {
-        'fade-in': 'fadeIn 1s ease-in',
-        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'gradient-move': 'gradientMove 3s ease infinite',
       },
       keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        gradientMove: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
         },
       },
     },

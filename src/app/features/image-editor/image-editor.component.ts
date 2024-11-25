@@ -1,10 +1,12 @@
 import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {ImageShareComponent} from '../image-share/image-share.component';
+import {ImageExportComponent} from '../image-export/image-export.component';
 
 @Component({
   selector: 'app-image-editor',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ImageShareComponent, ImageExportComponent],
   templateUrl: './image-editor.component.html',
   styleUrls: ['./image-editor.component.css']
 })

@@ -1,0 +1,61 @@
+<!-- Componente de Exportación -->
+<div class="p-6 rounded-lg bg-gradient-pastel-moving bg-gradient-size animate-gradient-move shadow-lg animate-fade-in">
+  <div class="space-y-6">
+    <!-- Formato Selector -->
+    <div class="flex items-center space-x-4">
+      <label for="format" class="text-gray-700 font-medium">Formato:</label>
+      <select
+        id="format"
+        [(ngModel)]="exportOptions.format"
+        (change)="updateFileName()"
+        class="px-4 py-2 rounded-md bg-white/60 border border-white/30 focus:border-white/50 focus:ring-2 focus:ring-white/30 focus:outline-none">
+        <option value="png">PNG</option>
+        <option value="jpeg">JPEG</option>
+        <option value="webp">WebP</option>
+      </select>
+    </div>
+
+    <!-- Control de Calidad -->
+    <div class="flex items-center space-x-4" *ngIf="exportOptions.format !== 'png'">
+      <label for="quality" class="text-gray-700 font-medium">Calidad:</label>
+      <div class="flex items-center space-x-4 flex-1">
+        <input
+          type="range"
+          id="quality"
+          [(ngModel)]="exportOptions.quality"
+          min="0"
+          max="100"
+          step="1"
+          class="w-full h-2 bg-white/30 rounded-lg appearance-none cursor-pointer">
+        <span class="text-gray-700 min-w-[3rem]">{{ exportOptions.quality }}%</span>
+      </div>
+    </div>
+
+    <!-- Nombre del archivo -->
+    <div class="flex items-center space-x-4">
+      <label for="fileName" class="text-gray-700 font-medium">Nombre:</label>
+      <input
+        type="text"
+        id="fileName"
+        [(ngModel)]="exportOptions.fileName"
+        class="flex-1 px-4 py-2 rounded-md bg-white/60 border border-white/30 focus:border-white/50 focus:ring-2 focus:ring-white/30 focus:outline-none">
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="flex space-x-4 pt-4">
+      <button
+        (click)="saveImage()"
+        [disabled]="!imageData"
+        class="flex-1 px-6 py-2 bg-white/50 hover:bg-white/70 transition-colors duration-300 rounded-md text-gray-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+        Guardar imagen
+      </button>
+      <button
+        (click)="downloadImage()"
+        [disabled]="!imageData"
+        class="flex-1 px-6 py-2 bg-white/50 hover:bg-white/70 transition-colors duration-300 rounded-md text-gray-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+        Descargar
+      </button>
+    </div>
+  </div>
+</div>
+

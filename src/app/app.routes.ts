@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { EditorComponent } from './components/editor/editor.component';
-import {ImageEditorComponent} from './image-editor/image-editor.component';
+import {ImageEditorComponent} from './features/image-editor/image-editor.component';
 
 export const routes: Routes = [
   {

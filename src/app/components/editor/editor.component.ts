@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ImageService } from '../../services/image.service';
 import { HeaderComponent } from "../shared/header/header.component";
 import { FooterComponent } from "../shared/footer/footer.component";
+import {FilterConfig} from '../../models/types/filters.interface';
 
 @Component({
   selector: 'app-editor',
@@ -12,7 +13,7 @@ import { FooterComponent } from "../shared/footer/footer.component";
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent {
-  filterConfigs = [
+  filterConfigs: FilterConfig[] = [
     {
       name: 'brightness',
       label: 'Brillo',
@@ -20,7 +21,7 @@ export class EditorComponent {
       max: 200,
       default: 100,
       unit: '%',
-      icon: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707' // sol
+      icon: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707'
     },
     {
       name: 'contrast',

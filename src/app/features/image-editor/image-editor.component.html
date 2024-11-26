@@ -1,8 +1,15 @@
-<main class="min-h-screen bg-gradient-pastel-moving bg-gradient-size animate-gradient-move p-4">
-  <div class="w-[90%] mx-auto bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-6">
+<main class="min-h-screen bg-gradient-to-br from-white via-pastel-blue to-pastel-purple overflow-hidden relative">
+  <!-- Elementos Decorativos -->
+  <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+    <div class="absolute top-20 left-10 w-64 h-64 bg-pastel-pink opacity-10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-pastel-blue opacity-10 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- Contenedor Principal -->
+  <div class="w-[90%] mx-auto bg-white/95 rounded-xl shadow-lg p-6 border border-blue-200 relative z-10 my-8">
     <!-- Header -->
     <header class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-800">
+      <h1 class="text-3xl font-bold text-blue-800">
         Editor de Imágenes
       </h1>
     </header>
@@ -10,42 +17,48 @@
     <!-- Contenedor principal con grid -->
     <div class="grid md:grid-cols-3 gap-6">
       <!-- Columna izquierda: Área de carga y preview (ocupa 2 columnas) -->
-      <div class="md:col-span-2">
+      <div class="md:col-span-2 inline-block">
         <!-- Área de carga -->
         <div
-          class="border-2 border-dashed border-pastel-blue rounded-xl p-8 text-center transition-all duration-300 mb-6"
-          [ngClass]="{'border-pastel-purple': isDragging}"
+          class="border-2 border-dashed border-blue-400 rounded-xl p-8 text-center transition-all duration-300 mb-6 bg-blue-50/80 backdrop-blur-sm"
+          style="border-width: 3px; border-style: dashed; border-spacing: 10px;"
+          [ngClass]="{'border-purple-500': isDragging}"
           (dragover)="onDragOver($event)"
           (dragleave)="onDragLeave($event)"
           (drop)="onDrop($event)">
 
-          <div class="space-y-4">
+        <div class="space-y-4">
             <div class="flex justify-center">
-              <div class="w-16 h-16 bg-pastel-blue/30 rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div class="w-16 h-16 bg-blue-200 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </div>
             </div>
 
-            <h3 class="text-lg font-semibold text-gray-700">
+            <h3 class="text-lg font-semibold text-blue-800">
               Arrastra y suelta tu imagen aquí
             </h3>
 
-            <p class="text-sm text-gray-500">o</p>
+            <p class="text-sm text-blue-600">o</p>
 
-            <button
-              (click)="triggerFileInput()"
-              class="px-6 py-3 rounded-lg text-gray-700 font-medium
-                     relative bg-[length:400%_400%] bg-gradient-pastel-moving animate-gradient-move
-                     transform transition-all duration-300 ease-in-out
-                     hover:shadow-lg hover:scale-105
-                     active:scale-95 active:opacity-90
-                     focus:outline-none focus:ring-2 focus:ring-white/50">
-              Seleccionar archivo
-            </button>
+            <div class="inline-block">
+              <button
+                (click)="triggerFileInput()"
+                class="px-6 py-3 rounded-lg text-white font-medium
+             bg-gradient-to-r from-blue-500 to-purple-600
+             transform transition-all duration-300 ease-in-out
+             hover:scale-105 hover:shadow-lg
+             active:scale-95 active:opacity-90
+             focus:outline-none
+             relative
+             hover:from-blue-600 hover:to-purple-700">
+                Seleccionar archivo
+                <div class="absolute inset-0 border-2 border-dashed border-white/50 rounded-lg -m-1 pointer-events-none"></div>
+              </button>
+            </div>
 
-            <input
+          <input
               #fileInput
               type="file"
               class="hidden"
@@ -55,7 +68,7 @@
         </div>
 
         <!-- Preview -->
-        <div *ngIf="selectedImage" class="p-4 bg-white/50 rounded-xl">
+        <div *ngIf="selectedImage" class="p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-md">
           <img
             [src]="selectedImage"
             alt="Preview"
@@ -66,14 +79,14 @@
       <!-- Columna derecha: Opciones (ocupa 1 columna) -->
       <div class="md:col-span-1 space-y-6">
         <!-- Componente de exportación -->
-        <div class="animate-fade-in">
-          <h2 class="text-xl font-semibold text-gray-800 mb-4">Exportar</h2>
+        <div class="bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-md border border-blue-200">
+          <h2 class="text-xl font-semibold text-blue-800 mb-4">Exportar</h2>
           <app-image-export [imageData]="selectedImage"></app-image-export>
         </div>
 
         <!-- Componente de compartir -->
-        <div class="animate-fade-in">
-          <h2 class="text-xl font-semibold text-gray-800 mb-4">Compartir</h2>
+        <div class="bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-md border border-blue-200">
+          <h2 class="text-xl font-semibold text-blue-800 mb-4">Compartir</h2>
           <app-image-share [imageUrl]="selectedImage"></app-image-share>
         </div>
       </div>

@@ -1,4 +1,4 @@
-<main class="min-h-screen bg-gradient-pastel p-4">
+<main class="min-h-screen bg-gradient-pastel-moving bg-gradient-size animate-gradient-move p-4">
   <div class="w-[90%] mx-auto bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-6">
     <!-- Header -->
     <header class="mb-6">
@@ -10,10 +10,10 @@
     <!-- Contenedor principal con grid -->
     <div class="grid md:grid-cols-3 gap-6">
       <!-- Columna izquierda: Área de carga y preview (ocupa 2 columnas) -->
-      <div class="md:col-span-2 space-y-6">
+      <div class="md:col-span-2">
         <!-- Área de carga -->
         <div
-          class="border-2 border-dashed border-pastel-blue rounded-xl p-8 text-center transition-all duration-300"
+          class="border-2 border-dashed border-pastel-blue rounded-xl p-8 text-center transition-all duration-300 mb-6"
           [ngClass]="{'border-pastel-purple': isDragging}"
           (dragover)="onDragOver($event)"
           (dragleave)="onDragLeave($event)"
@@ -37,15 +37,14 @@
             <button
               (click)="triggerFileInput()"
               class="px-6 py-3 rounded-lg text-gray-700 font-medium
-         relative bg-[length:400%_400%] bg-gradient-pastel-moving animate-gradient-move
-         transform transition-all duration-300 ease-in-out
-         hover:shadow-lg hover:scale-105
-         active:scale-95 active:opacity-90
-         focus:outline-none focus:ring-2 focus:ring-white/50">
+                     relative bg-[length:400%_400%] bg-gradient-pastel-moving animate-gradient-move
+                     transform transition-all duration-300 ease-in-out
+                     hover:shadow-lg hover:scale-105
+                     active:scale-95 active:opacity-90
+                     focus:outline-none focus:ring-2 focus:ring-white/50">
               Seleccionar archivo
             </button>
 
-          </div>
             <input
               #fileInput
               type="file"
@@ -65,21 +64,17 @@
       </div>
 
       <!-- Columna derecha: Opciones (ocupa 1 columna) -->
-      <div *ngIf="selectedImage" class="space-y-6">
+      <div class="md:col-span-1 space-y-6">
         <!-- Componente de exportación -->
         <div class="animate-fade-in">
           <h2 class="text-xl font-semibold text-gray-800 mb-4">Exportar</h2>
-          <app-image-export
-            [imageData]="selectedImage">
-          </app-image-export>
+          <app-image-export [imageData]="selectedImage"></app-image-export>
         </div>
 
         <!-- Componente de compartir -->
         <div class="animate-fade-in">
           <h2 class="text-xl font-semibold text-gray-800 mb-4">Compartir</h2>
-          <app-image-share
-            [imageUrl]="selectedImage">
-          </app-image-share>
+          <app-image-share [imageUrl]="selectedImage"></app-image-share>
         </div>
       </div>
     </div>
